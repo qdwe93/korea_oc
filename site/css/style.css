@@ -1,0 +1,727 @@
+/* ==========================================================================
+   코리아유화주식회사 — 디자인 시스템 (PRD §5)
+   브랜드 컬러는 기존 자산(assets/reference) 계승. 임의 변경 금지.
+   ========================================================================== */
+
+:root {
+  --navy: #242860;
+  --blue: #2e6db4;
+  --sky: #5bc2e7;
+  --orange: #ffab07;
+  --ink: #1a1d29;
+  --gray: #6b7080;
+  --line: #e3e6ec;
+  --bg: #f7f8fa;
+  --white: #ffffff;
+  --container: 1140px;
+  --header-h: 72px;
+}
+
+/* --- 리셋 --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard Variable", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--white);
+  word-break: keep-all;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+/* 전화번호 줄바꿈 방지 — U+2011 특수 하이픈 대신 CSS로 처리 (복사·검색 호환성 유지) */
+a[href^="tel:"] {
+  white-space: nowrap;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- 접근성: 본문 바로가기 --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 18px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* ==========================================================================
+   헤더
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 로고: 기존 로고(assets/reference/temp_p01.jpg)의 문안·배색을 텍스트로 계승 */
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logo-en {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+}
+
+.logo-en .logo-sub {
+  color: var(--sky);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.logo-ko {
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: 0.28em;
+}
+
+/* GNB */
+.gnb {
+  display: none;
+}
+
+.site-header.nav-open .gnb {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 12px 24px rgba(26, 29, 41, 0.08);
+}
+
+.site-header.nav-open .gnb a {
+  display: block;
+  padding: 15px 24px;
+  font-weight: 600;
+  border-top: 1px solid var(--line);
+}
+
+.gnb a[aria-current="page"] {
+  color: var(--blue);
+}
+
+/* 햄버거 토글 */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--navy);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (min-width: 1024px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .gnb {
+    display: flex;
+    gap: 40px;
+  }
+
+  .gnb a {
+    font-weight: 600;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .gnb a:hover,
+  .gnb a[aria-current="page"] {
+    color: var(--blue);
+    border-bottom-color: var(--orange);
+  }
+}
+
+/* ==========================================================================
+   버튼
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.88;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btn-accent {
+  background: var(--orange);
+  color: #3a2a00;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: var(--white);
+}
+
+/* ==========================================================================
+   히어로 (홈)
+   이미지(hero-main.jpg) 미준비 시에도 맨 아래 그라데이션 레이어가 표시됨 (PRD §6 폴백)
+   ========================================================================== */
+.hero {
+  background-image:
+    linear-gradient(180deg, rgba(21, 24, 54, 0.72), rgba(21, 24, 54, 0.42) 55%, rgba(21, 24, 54, 0.66)),
+    url("../assets/images/hero-main.jpg"),
+    linear-gradient(150deg, #242860 0%, #2e6db4 60%, #17325c 100%);
+  background-size: cover, cover, cover;
+  background-position: center;
+  color: var(--white);
+}
+
+.hero-inner {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.hero-eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--sky);
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.hero-sub {
+  margin-top: 18px;
+  font-size: clamp(15px, 2vw, 18px);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+}
+
+.hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   공통 섹션
+   ========================================================================== */
+.section {
+  padding: 56px 0;
+}
+
+.section-alt {
+  background: var(--bg);
+}
+
+.section-head {
+  margin-bottom: 32px;
+}
+
+.section-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-head h2 {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.section-desc {
+  margin-top: 12px;
+  color: var(--gray);
+  max-width: 720px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 96px 0;
+  }
+}
+
+/* ==========================================================================
+   서브페이지 상단 배너
+   ========================================================================== */
+.page-banner {
+  background-image:
+    linear-gradient(180deg, rgba(21, 24, 54, 0.6), rgba(21, 24, 54, 0.6)),
+    url("../assets/images/about-visual.jpg"),
+    linear-gradient(150deg, #242860 0%, #2e6db4 100%);
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+}
+
+.page-banner .container {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.page-banner h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+}
+
+.page-banner p {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ==========================================================================
+   카드 (사업영역 요약/상세)
+   ========================================================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-media {
+  aspect-ratio: 3 / 2;
+  background-size: cover;
+  background-position: center;
+}
+
+/* 각 카드 이미지 — 미준비 시 브랜드 그라데이션 폴백 */
+.media-fuel {
+  background-image: url("../assets/images/biz-fuel.jpg"), linear-gradient(140deg, #2e6db4, #242860);
+}
+
+.media-marine {
+  background-image: url("../assets/images/biz-marine.jpg"), linear-gradient(140deg, #5bc2e7, #2e6db4);
+}
+
+.media-chem {
+  background-image: url("../assets/images/biz-chem.jpg"), linear-gradient(140deg, #242860, #17325c);
+}
+
+.card-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.card-body p {
+  color: var(--gray);
+  font-size: 15px;
+  flex: 1;
+}
+
+.card-link {
+  font-weight: 700;
+  color: var(--blue);
+  font-size: 14px;
+}
+
+.card-link::after {
+  content: " →";
+}
+
+/* ==========================================================================
+   사업영역 상세 (business.html)
+   ========================================================================== */
+.biz-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.biz-detail:last-of-type {
+  border-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .biz-detail {
+    grid-template-columns: 5fr 7fr;
+    gap: 48px;
+  }
+
+  .biz-detail.reverse .biz-media {
+    order: 2;
+  }
+}
+
+.biz-media {
+  aspect-ratio: 3 / 2;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.biz-body h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.biz-body p {
+  color: var(--gray);
+}
+
+.item-list {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item-list li {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ==========================================================================
+   회사 개요 표 / 인사말 (about.html)
+   ========================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 56px;
+  }
+}
+
+.greeting p + p {
+  margin-top: 14px;
+}
+
+.greeting .sign {
+  margin-top: 24px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.greeting-media {
+  border-radius: 10px;
+  min-height: 320px;
+  background-image: url("../assets/images/about-greeting.jpg"), linear-gradient(160deg, #2e6db4, #242860);
+  background-size: cover;
+  background-position: center;
+}
+
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.overview-table th,
+.overview-table td {
+  text-align: left;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.overview-table th {
+  width: 130px;
+  color: var(--navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   연락 CTA 밴드
+   ========================================================================== */
+.cta-band {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.cta-inner {
+  padding: 56px 20px;
+  text-align: center;
+}
+
+.cta-inner h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+}
+
+.cta-inner p {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cta-actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.cta-tel {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   문의·오시는길 (contact.html)
+   ========================================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.contact-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.contact-card dt {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.contact-card dd {
+  margin-top: 6px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+
+.contact-card .hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.map-frame {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.map-links {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.map-links a {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 14px;
+}
+
+/* ==========================================================================
+   플레이스홀더 표시 (미확정 콘텐츠 — 확정 시 제거)
+   ========================================================================== */
+.placeholder-note {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #fff7e6;
+  border: 1px dashed var(--orange);
+  border-radius: 6px;
+  font-size: 13px;
+  color: #7a5200;
+}
+
+/* ==========================================================================
+   푸터
+   ========================================================================== */
+.site-footer {
+  background: #17193b;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+}
+
+.footer-inner {
+  padding-top: 44px;
+  padding-bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-brand strong {
+  display: block;
+  color: var(--white);
+  font-size: 16px;
+}
+
+.footer-brand .footer-en {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-info p {
+  overflow-wrap: anywhere;
+}
+
+.footer-info a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.copyright {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}

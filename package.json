@@ -1,0 +1,17 @@
+{
+  "name": "koreaoilchem-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "코리아유화주식회사 공식 홈페이지 (정적 사이트) — docs/03-PRD.md 참조",
+  "scripts": {
+    "serve": "node tests/server.js",
+    "test:html": "html-validate \"site/**/*.html\"",
+    "test:links": "node tests/check-links.mjs",
+    "test:e2e": "playwright test",
+    "test": "npm run test:html && npm run test:links && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "html-validate": "^11.5.5"
+  }
+}

@@ -15,14 +15,23 @@
 ## 폴더 구조
 
 ```
-docs/               기획 문서 (한글 마크다운)
-assets/reference/   기존 사이트에서 수집한 원본 자산 (로고 등)
-assets/images/      ← 생성 이미지를 여기에 배치 (docs/04 참조)
-site/               ← 개발 단계에서 생성될 웹사이트 본체
+docs/                  기획 문서 (한글 마크다운)
+assets/reference/      기존 사이트에서 수집한 원본 자산 (로고 등, 배포 제외)
+site/                  웹사이트 본체 — FTP 업로드 루트 (4페이지 + css/js/assets)
+site/assets/images/    ← 생성 이미지를 여기에 배치 (docs/04 참조)
+tests/                 자동화 테스트 (Playwright 스모크·콘텐츠 가드·링크 체커·정적 서버)
+```
+
+## 실행·테스트
+
+```
+npm install && npx playwright install chromium   # 최초 1회
+npm run serve    # 로컬 미리보기 http://127.0.0.1:4173
+npm test         # html-validate → 링크 체크 → Playwright (24케이스)
 ```
 
 ## 다음 할 일
 
-1. `docs/04-이미지-준비목록.md`의 프롬프트로 이미지 생성 → `assets/images/`에 저장
-2. `docs/03-PRD.md` §11 미해결 질문 답변 확보
-3. PRD 부록의 지시문으로 개발 시작
+1. `docs/04-이미지-준비목록.md`의 프롬프트로 이미지 생성 → `site/assets/images/`에 저장 (넣기만 하면 반영)
+2. `docs/03-PRD.md` §11 미해결 질문 답변 확보 (특히 취급 품목·사업자등록번호)
+3. 사이트 검수 → 피드백 반영 → 배포 (체크리스트: `docs/02-기획서.md` §6, 진행 상황: `TODOs.md`)
