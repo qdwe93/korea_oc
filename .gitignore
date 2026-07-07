@@ -2,3 +2,6 @@ node_modules/
 test-results/
 playwright-report/
 .playwright/
+
+# 생성 이미지 원본 (대용량) — 최적화본은 site/assets/images/ 에 커밋됨
+assets/images/

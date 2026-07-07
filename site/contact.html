@@ -6,6 +6,11 @@
   <title>문의·오시는길 | 코리아유화주식회사</title>
   <meta name="description" content="코리아유화주식회사 문의·오시는길 — 부산 동구 초량3동 1154-1 서남빌딩 502호. TEL 051-816-2726, FAX 051-816-2728">
   <link rel="canonical" href="https://www.koreaoilchem.com/contact.html">
+  <link rel="alternate" hreflang="ko" href="https://www.koreaoilchem.com/contact.html">
+  <link rel="alternate" hreflang="en" href="https://www.koreaoilchem.com/en/contact.html">
+  <link rel="alternate" hreflang="ja" href="https://www.koreaoilchem.com/ja/contact.html">
+  <link rel="alternate" hreflang="zh" href="https://www.koreaoilchem.com/zh/contact.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.koreaoilchem.com/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="문의·오시는길 | 코리아유화주식회사">
   <meta property="og:description" content="부산 동구 초량3동 1154-1 서남빌딩 502호. TEL 051-816-2726">
@@ -15,7 +20,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-asset-root="">
   <a class="skip-link" href="#main">본문 바로가기</a>
 
   <header class="site-header">
@@ -24,12 +29,18 @@
         <span class="logo-en">KOREA OIL <span class="logo-sub">CHEMICAL CO.,LTD</span></span>
         <span class="logo-ko">코리아유화주식회사</span>
       </a>
-      <nav aria-label="주 메뉴">
+      <nav class="site-nav" aria-label="주 메뉴">
         <ul id="gnb" class="gnb">
           <li><a href="about.html">회사소개</a></li>
           <li><a href="business.html">사업영역</a></li>
           <li><a href="contact.html" aria-current="page">문의·오시는길</a></li>
         </ul>
+        <div class="lang-switch">
+          <a href="contact.html" lang="ko" aria-current="true">KOR</a>
+          <a href="en/contact.html" lang="en" hreflang="en">ENG</a>
+          <a href="ja/contact.html" lang="ja" hreflang="ja">JPN</a>
+          <a href="zh/contact.html" lang="zh-CN" hreflang="zh">中文</a>
+        </div>
       </nav>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="gnb" aria-label="메뉴 열기">
         <span class="nav-toggle-bar"></span>
@@ -40,7 +51,7 @@
   </header>
 
   <main id="main">
-    <section class="page-banner">
+    <section class="page-banner" data-img="about-visual">
       <div class="container">
         <h1>문의·오시는길</h1>
         <p>전화·이메일로 문의하시면 성실하게 안내해 드리겠습니다.</p>
@@ -59,7 +70,7 @@
             <dt>TEL</dt>
             <dd>
               <a href="tel:051-816-2726">051-816-2726</a>
-              <span class="hint">모바일에서 누르면 바로 전화 연결됩니다</span>
+              <span class="hint">모바일에서 누르면 바로 전화 연결됩니다 (해외에서는 +82-51-816-2726)</span>
             </dd>
           </div>
           <div class="contact-card">
@@ -70,7 +81,7 @@
             <dt>E-mail</dt>
             <dd>
               <a href="mailto:koreaoil@koreaoilchem.com">koreaoil@koreaoilchem.com</a>
-              <span class="hint">견적·거래 문의를 보내주세요</span>
+              <span class="hint">견적·거래 문의를 보내주세요 (한국어·영어·일본어·중국어 가능)</span>
             </dd>
           </div>
           <div class="contact-card">
@@ -90,7 +101,8 @@
         <div class="section-head">
           <p class="section-eyebrow">Location</p>
           <h2>오시는길</h2>
-          <p class="section-desc">부산 동구 초량3동 1154-1 서남빌딩 502호</p>
+          <p class="section-desc">부산 동구 초량3동 1154-1 서남빌딩 502호 — 부산 도시철도 1호선 부산역·초량역 인근</p>
+          <!-- [확인필요] 대중교통 상세(출구 번호, 도보 시간), 주차 안내 -->
         </div>
         <iframe
           class="map-frame"
@@ -102,10 +114,7 @@
           <a href="https://map.kakao.com/link/search/%EB%B6%80%EC%82%B0%20%EB%8F%99%EA%B5%AC%20%EC%B4%88%EB%9F%893%EB%8F%99%201154-1" target="_blank" rel="noopener">카카오맵에서 보기</a>
           <a href="https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EB%8F%99%EA%B5%AC%20%EC%B4%88%EB%9F%893%EB%8F%99%201154-1" target="_blank" rel="noopener">네이버지도에서 보기</a>
         </div>
-        <p class="placeholder-note">
-          ※ 대중교통 안내 : 부산 도시철도 1호선 부산역·초량역 인근 — 정확한 출구·도보 시간은 확인 후 기재 예정
-        </p>
-        <!-- [확인필요] 대중교통 상세(출구 번호, 도보 시간), 주차 안내 / 카카오맵 퍼가기 스니펫 발급 시 iframe 교체 (TODOs.md 참조) -->
+        <!-- 카카오맵 퍼가기 스니펫 발급 시 iframe 교체 (TODOs.md 참조) -->
       </div>
     </section>
   </main>

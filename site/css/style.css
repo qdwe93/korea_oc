@@ -35,6 +35,11 @@ body {
   line-height: 1.7;
   color: var(--ink);
   background: var(--white);
+  overflow-wrap: break-word;
+}
+
+/* 한국어만 어절 단위 줄바꿈 — ja/zh에 keep-all을 적용하면 줄바꿈이 막혀 가로 오버플로 발생 */
+body:lang(ko) {
   word-break: keep-all;
 }
 
@@ -138,14 +143,20 @@ a[href^="tel:"] {
   letter-spacing: 0.28em;
 }
 
-/* GNB */
-.gnb {
+/* GNB + 언어 전환 — 모바일에서는 드롭다운 패널로 함께 열림 */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.gnb,
+.lang-switch {
   display: none;
 }
 
-.site-header.nav-open .gnb {
-  display: flex;
-  flex-direction: column;
+.site-header.nav-open .site-nav {
+  display: block;
   position: absolute;
   top: var(--header-h);
   left: 0;
@@ -155,6 +166,11 @@ a[href^="tel:"] {
   box-shadow: 0 12px 24px rgba(26, 29, 41, 0.08);
 }
 
+.site-header.nav-open .gnb {
+  display: flex;
+  flex-direction: column;
+}
+
 .site-header.nav-open .gnb a {
   display: block;
   padding: 15px 24px;
@@ -162,8 +178,28 @@ a[href^="tel:"] {
   border-top: 1px solid var(--line);
 }
 
+.site-header.nav-open .lang-switch {
+  display: flex;
+  gap: 22px;
+  padding: 15px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
 .gnb a[aria-current="page"] {
   color: var(--blue);
+}
+
+.lang-switch a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+}
+
+.lang-switch a[aria-current="true"] {
+  color: var(--navy);
+  font-weight: 800;
 }
 
 /* 햄버거 토글 */
@@ -221,6 +257,14 @@ a[href^="tel:"] {
     color: var(--blue);
     border-bottom-color: var(--orange);
   }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
 }
 
 /* ==========================================================================
@@ -259,9 +303,10 @@ a[href^="tel:"] {
    이미지(hero-main.jpg) 미준비 시에도 맨 아래 그라데이션 레이어가 표시됨 (PRD §6 폴백)
    ========================================================================== */
 .hero {
+  /* --img 는 js/main.js 가 변형(_1.._n) 중 하나를 무작위 주입 — 미주입 시 _1, 파일 없으면 그라데이션 */
   background-image:
     linear-gradient(180deg, rgba(21, 24, 54, 0.72), rgba(21, 24, 54, 0.42) 55%, rgba(21, 24, 54, 0.66)),
-    url("../assets/images/hero-main.jpg"),
+    var(--img, url("../assets/images/hero-main_1.jpg")),
     linear-gradient(150deg, #242860 0%, #2e6db4 60%, #17325c 100%);
   background-size: cover, cover, cover;
   background-position: center;
@@ -349,7 +394,7 @@ a[href^="tel:"] {
 .page-banner {
   background-image:
     linear-gradient(180deg, rgba(21, 24, 54, 0.6), rgba(21, 24, 54, 0.6)),
-    url("../assets/images/about-visual.jpg"),
+    var(--img, url("../assets/images/about-visual_1.jpg")),
     linear-gradient(150deg, #242860 0%, #2e6db4 100%);
   background-size: cover;
   background-position: center;
@@ -403,15 +448,15 @@ a[href^="tel:"] {
 
 /* 각 카드 이미지 — 미준비 시 브랜드 그라데이션 폴백 */
 .media-fuel {
-  background-image: url("../assets/images/biz-fuel.jpg"), linear-gradient(140deg, #2e6db4, #242860);
+  background-image: var(--img, url("../assets/images/biz-fuel_1.jpg")), linear-gradient(140deg, #2e6db4, #242860);
 }
 
 .media-marine {
-  background-image: url("../assets/images/biz-marine.jpg"), linear-gradient(140deg, #5bc2e7, #2e6db4);
+  background-image: var(--img, url("../assets/images/biz-marine_1.jpg")), linear-gradient(140deg, #5bc2e7, #2e6db4);
 }
 
 .media-chem {
-  background-image: url("../assets/images/biz-chem.jpg"), linear-gradient(140deg, #242860, #17325c);
+  background-image: var(--img, url("../assets/images/biz-chem_1.jpg")), linear-gradient(140deg, #242860, #17325c);
 }
 
 .card-body {
@@ -535,9 +580,52 @@ a[href^="tel:"] {
 .greeting-media {
   border-radius: 10px;
   min-height: 320px;
-  background-image: url("../assets/images/about-greeting.jpg"), linear-gradient(160deg, #2e6db4, #242860);
+  background-image: var(--img, url("../assets/images/about-greeting_1.jpg")), linear-gradient(160deg, #2e6db4, #242860);
   background-size: cover;
   background-position: center;
+}
+
+/* 핵심 가치 카드 (신뢰·전문성·패기) */
+.value-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .value-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.value-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--orange);
+  border-radius: 10px;
+  padding: 26px 24px;
+}
+
+.value-card .value-en {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--sky);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.value-card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.value-card p {
+  margin-top: 10px;
+  color: var(--gray);
+  font-size: 15px;
 }
 
 .overview-table {
