@@ -1,0 +1,46 @@
+# site/ 를 GitHub Pages에 배포해 검수용 미리보기를 제공한다.
+# ※ 미리보기 전용 — 최종 목적지는 실제 호스팅(koreaoilchem.com)이다.
+#    검색엔진이 github.io 미리보기 주소를 색인하지 않도록, 배포본의 robots.txt만
+#    색인 차단본으로 덮어쓴다(레포의 production robots.txt는 그대로 둔다).
+name: deploy-preview
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시에 하나만 배포 (진행 중이던 이전 배포는 취소)
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 미리보기 배포본만 색인 차단 robots.txt로 교체
+        run: printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
+
+      - name: Jekyll 처리 비활성화
+        run: touch site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

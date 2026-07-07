@@ -50,6 +50,8 @@ tools/optimize-images.ps1         # assets/images/ 원본 → site/assets/images
 | 07-07 | 이미지 로테이션은 순수 랜덤 (세션 고정 없음) | 의뢰인 요청("심심하지 않게"), 정적 사이트에서 가장 단순 |
 | 07-07 | `word-break: keep-all`은 ko에만 적용 | ja/zh에서는 줄바꿈이 막혀 모바일 가로 오버플로 발생 (테스트로 검출·수정) |
 | 07-07 | CSS `--img` 변수에는 **절대 URL**만 주입 | 커스텀 프로퍼티 안의 상대 url()은 스타일시트(/css/) 기준으로 해석돼 루트 페이지에서 404 → 회귀 테스트 추가 |
+| 07-07 | CI 2종: `test.yml`(푸시·PR 테스트) + `deploy-preview.yml`(GitHub Pages 미리보기) | 원격에서도 테스트 검증 + 실제 호스팅 전 검수용 미리보기 |
+| 07-07 | Pages 미리보기 배포본만 robots.txt를 `Disallow: /`로 덮어씀 (레포 소스는 유지) | github.io 미리보기가 검색 색인되어 실제 도메인과 경쟁하는 것 방지 |
 
 ## 주의 사항 (잊으면 안 되는 것)
 - **mail.koreaoilchem.com 메일 운영 중** → DNS/호스팅 변경 시 MX 레코드 보존 필수
