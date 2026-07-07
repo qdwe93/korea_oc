@@ -28,11 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 미리보기 배포본만 색인 차단 robots.txt로 교체
-        run: printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
-
-      - name: Jekyll 처리 비활성화
-        run: touch site/.nojekyll
+      - name: 미리보기 배포본만 색인 차단 robots.txt로 교체 (+ Jekyll 비활성화)
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
+          touch site/.nojekyll
 
       - uses: actions/configure-pages@v5
         with:
